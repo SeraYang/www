@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title></title>
+        <?php
+            echo "<br>Below is using PDO:<br>";
+            $pdoserver_name = "localhost";
+            $pdouser_name = "root";
+            $pdopassword = "Yang123";
+
+            // Create connection
+            try{
+                $conn = new PDO("mysql:host=$pdoserver_name;
+                                        dbname=ohDB",
+                                        $pdouser_name, $pdopassword);
+
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                echo $conn->getAttribute(PDO::ATTR_DRIVER_NAME),'<br>';
+                echo "Connected successfully. hahaha";
+            }catch(PDOException $e){
+                echo "Connection failed: ".$e->getMessage();
+            }
+            echo '<br>Testing the SQL entries:<br>';
+            $stat = $conn->prepare("INSERT INTO test (Name,address,email,Age,Gender) VALUES (:name,:address,:email,:age,:gender)");
+            $stat->bindParam(':name',$name);
+            $stat->bindParam(':address',$addre);
+            $stat->bindParam(':email',$email);
+            $stat->bindParam(':age',$age);
+            $stat->bindParam(':gender',$gender);
+
+
+            $name = "Yifan Yang";
+            $addre = "100 stanford ave westbury";
+            $email = "123@google.com";
+            $age = 12;
+            $gender = 'F';
+            $stat->execute();
+        ?>
+    </head>
+
+    <body>
+        <?php
+            echo $_POST["name"],"<br>";
+            //try{
+            //    $conn = null;
+            //    echo "<br>close successfully!!!<br>";
+            //} catch (Exception $e){
+            //    echo "Close failed: ".$e -> getMessage();
+            //}
+        ?>
+        <form action="index.php" method="post">
+            Name:<br>
+            <input type="text" name="name"> <br>
+            Address:<br>
+            <input type="text" name="address"> <br>
+            Email: <br>
+            <input type="text" name="email"> <br>
+            Age: <br>
+            <input type="text" name="age"> <br>
+            Gender:<br>
+            <select name="gender">
+                <option value="M"> Male </option>
+                <option value="F"> Female </option>
+            </select>
+
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <?php
+            try{$name = $_POST["name"];
+            $addre = $_POST["address"];
+            $email = $_POST["email"];
+            $age = $_POST["age"];
+            $gender = $_POST["gender"];
+            $stat->execute();
+            }catch(PDOEXCEPTION $xxxxxx){
+                echo "there is something wrong.<br>";
+            }
+
+            echo "<br><br><br><br>";
+            echo "yangyifan";
+            $fetchit = $conn->prepare("SELECT * FROM test where name = ?");
+            if($fetchit->execute(array($_POST['name']))){
+                while($row = $fetchit->fetch()){
+                    print_r($row);
+                }
+            }
+        ?>
+    </body>
+</html>
+

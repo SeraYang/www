@@ -1,0 +1,9 @@
+cleanup.format.on.save=false
+cleanup.remove_trailing_whitespaces=false
+cleanup.remove_trailing_whitespaces_all=true
+cleanup.remove_trailing_whitespaces_ignore_empty=false
+eclipse.preferences.version=1
+org.eclipse.php.core.workspaceDefaultLocale=en_US
+org.eclipse.php.ui.wizards.JSsupport=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

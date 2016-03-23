@@ -1,0 +1,12 @@
+<?php
+	echo 'this is DBaccess.php';
+	class dbpdo{
+		private $dbusername = "root";
+		private $dbpassword = "Yang123";
+		private $dbhost = "localhost";
+		private $dbname = "ohDB_AGENT";
+		
+		public function sql($str){
+			
+		}
+	}
